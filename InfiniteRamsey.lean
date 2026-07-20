@@ -191,3 +191,20 @@ theorem infinite_ramsey_triples [Finite κ] (c : Finset ℕ → κ) :
   infinite_ramsey_seq 3 c
 
 end
+
+/-!
+## Verification
+
+The two `#guard_msgs` blocks below make the build **fail** if the headline theorems ever depend
+on anything beyond the three standard axioms of classical mathematics — in particular if a
+`sorry` (which would surface as `sorryAx`) ever slips in. They are the self-contained analogue of
+an axiom audit, and CI runs them on every push.
+-/
+
+/-- info: 'infinite_ramsey' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms infinite_ramsey
+
+/-- info: 'infinite_ramsey_seq' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms infinite_ramsey_seq

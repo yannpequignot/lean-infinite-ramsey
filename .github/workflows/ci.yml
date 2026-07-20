@@ -1,0 +1,35 @@
+name: CI
+
+# Kernel-checks the proof on every push and pull request.
+#
+# A green run is the auditable certificate: it builds `InfiniteRamsey.lean` with Lean's kernel
+# against the pinned Mathlib (v4.28.0). The file ends with two `#guard_msgs` axiom checks, so a
+# green build also asserts that the headline theorems depend on nothing but propext,
+# Classical.choice and Quot.sound — in particular, no `sorry`. If any proof broke or a `sorry`
+# slipped in, this workflow would go red.
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+  workflow_dispatch:
+
+# Cancel superseded runs on the same ref.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build & kernel-check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      # Installs elan (reads lean-toolchain), fetches the prebuilt Mathlib cache
+      # (`lake exe cache get`), and runs `lake build` on the default target.
+      - name: Build with lean-action
+        uses: leanprover/lean-action@v1
+        with:
+          use-mathlib-cache: true

@@ -1,5 +1,6 @@
 # The infinite Ramsey theorem in Lean 4
 
+[![CI](https://github.com/yannpequignot/lean-infinite-ramsey/actions/workflows/ci.yml/badge.svg)](https://github.com/yannpequignot/lean-infinite-ramsey/actions/workflows/ci.yml)
 ![Lean 4](https://img.shields.io/badge/Lean-v4.28.0-purple.svg)
 ![Mathlib](https://img.shields.io/badge/Mathlib-v4.28.0-blue.svg)
 
