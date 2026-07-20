@@ -19,7 +19,6 @@ get one colour.
 |---|---|
 | `infinite_ramsey (r) (c) (hM : M.Infinite)` | For every finite colouring `c` of the `r`-subsets and every infinite `M ⊆ ℕ`, there is an infinite `N ⊆ M` monochromatic on its `r`-subsets. Proved by **induction on `r`**. |
 | `infinite_ramsey_seq` | Enumeration form: the monochromatic set is the range of a `StrictMono e : ℕ → ℕ`. |
-| `infinite_ramsey_pairs`, `infinite_ramsey_triples` | The arity `2` (RT²) and `3` (RT³) instances. |
 
 The inductive step is the classical "fan" argument: from an infinite `S`, take the least
 element `a`; the link colouring `e ↦ c (insert a e)` drops the arity by one, so the induction

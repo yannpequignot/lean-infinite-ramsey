@@ -11,7 +11,7 @@ import Mathlib.Data.Nat.Nth
 # The infinite Ramsey theorem
 
 This file proves the infinite Ramsey theorem for finite colourings of the `r`-element subsets of
-`ℕ`, for arbitrary arity `r`, and derives the pairs (`RT²`) and triples (`RT³`) cases.
+`ℕ`, for arbitrary arity `r`.
 
 A colouring of `r`-subsets is modelled as a function `c : Finset ℕ → κ` (evaluated only on
 finsets of cardinality `r`); a monochromatic set is an infinite `N ⊆ ℕ` such that `c` is
@@ -25,7 +25,6 @@ constant on all `r`-subsets of `N`. This is the same interface used by B. Mehta'
   induction on `r`.
 * `infinite_ramsey_seq`: the enumeration form — the monochromatic set can be taken to be the range
   of a strictly monotone `e : ℕ → ℕ`.
-* `infinite_ramsey_pairs`, `infinite_ramsey_triples`: the arity `2` and `3` instances.
 
 ## Implementation notes
 
@@ -177,18 +176,6 @@ theorem infinite_ramsey_seq [Finite κ] (r : ℕ) (c : Finset ℕ → κ) :
   obtain ⟨e, he, hmem⟩ := hNinf.exists_strictMono
   exact ⟨e, he, col, fun t htsub htcard =>
     hcol t (htsub.trans (Set.range_subset_iff.mpr hmem)) htcard⟩
-
-/-- **The infinite Ramsey theorem for pairs (RT²)**, as the arity-`2` instance. -/
-theorem infinite_ramsey_pairs [Finite κ] (c : Finset ℕ → κ) :
-    ∃ e : ℕ → ℕ, StrictMono e ∧ ∃ col : κ,
-      ∀ t : Finset ℕ, ↑t ⊆ Set.range e → t.card = 2 → c t = col :=
-  infinite_ramsey_seq 2 c
-
-/-- **The infinite Ramsey theorem for triples (RT³)**, as the arity-`3` instance. -/
-theorem infinite_ramsey_triples [Finite κ] (c : Finset ℕ → κ) :
-    ∃ e : ℕ → ℕ, StrictMono e ∧ ∃ col : κ,
-      ∀ t : Finset ℕ, ↑t ⊆ Set.range e → t.card = 3 → c t = col :=
-  infinite_ramsey_seq 3 c
 
 end
 
